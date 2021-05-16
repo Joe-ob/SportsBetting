@@ -11,6 +11,10 @@ import pytz
 
 load_dotenv()
 
+a = []
+b = []
+teams = []
+teams_playing = []
 
 def Match_Team(item, teams_playing):
     """
@@ -21,7 +25,22 @@ def Match_Team(item, teams_playing):
 
     Example: Is the list ["New", "York"] in the list ["New", "York", "Yankees"]
     """
+
     check = all(item in teams_playing for item in teams)
+    if check is True:
+        a.append(item['teams'])
+        b.append(item['teams'])
+        print("")
+        print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
+        time.sleep(delay)
+        for site in item["sites"]:
+            print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
+        teams_playing.clear()
+    if check is False:
+        pass
+        teams_playing.clear()
+        
+
 
 
 apikey = os.environ.get("API_KEY")
@@ -165,7 +184,7 @@ if OnlineList[user_index] == "Yes":
             for item in Team_name:
                 name_cap = item.capitalize()
                 teams.append(name_cap)
-            print(teams)
+            #print(teams)
             for item in odds_json['data']:
                 #print(item.keys())
                 commence_datetime = item['commence_time']
@@ -197,19 +216,20 @@ if OnlineList[user_index] == "Yes":
                         print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
                         for site in item["sites"]:
                             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-                    check = all(item in teams_playing for item in teams)
-                    if check is True:
-                        a.append(item['teams'])
-                        b.append(item['teams'])
-                        print("")
-                        print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-                        time.sleep(delay)
-                        for site in item["sites"]:
-                            print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-                        teams_playing.clear()
-                    if check is False:
-                        pass
-                        teams_playing.clear()
+                    #check = all(item in teams_playing for item in teams)
+                    Match_Team(item, teams_playing)
+                    #if check is True:
+                    #    a.append(item['teams'])
+                    #    b.append(item['teams'])
+                    #    print("")
+                    #    print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
+                    #    time.sleep(delay)
+                    #    for site in item["sites"]:
+                    #        print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
+                    #    teams_playing.clear()
+                    #if check is False:
+                    #    pass
+                    #    teams_playing.clear()
 
                     
 
@@ -233,7 +253,7 @@ if OnlineList[user_index] == "Yes":
                         print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
                         for site in item["sites"]:
                             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-                
+        
         
             if not b:
                 print("---------------")

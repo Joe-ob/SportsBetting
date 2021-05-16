@@ -14,6 +14,34 @@ load_dotenv()
 
 apikey = os.environ.get("API_KEY")
 
+#a = []
+#b = []
+#teams = []
+#teams_playing = []
+#
+#def Match_Team(item, teams_playing):
+#    """
+#    Format: strings in lists
+#
+#    This function takes the string item(s) input and searches
+#    if any of these strings match the list of home teams.
+#
+#    Example: Is the list ["New", "York"] in the list ["New", "York", "Yankees"]
+#    """
+#
+#    check = all(item in teams_playing for item in teams)
+#    if check is True:
+#        a.append(item['teams'])
+#        b.append(item['teams'])
+#        print("")
+#        print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
+#        time.sleep(delay)
+#        for site in item["sites"]:
+#            print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
+#        teams_playing.clear()
+#    if check is False:
+#        pass
+#        teams_playing.clear()
 
 #data_1 = pd.read_csv('SportsBetting.csv')
 #print(data_1)
@@ -186,6 +214,7 @@ if OnlineList[user_index] == "Yes":
                         print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
                         for site in item["sites"]:
                             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
+                    #Match_Team(item, teams_playing)
                     check = all(item in home_team for item in teams) or all(item in away_team for item in teams)
                     if check is True:
                         a.append(item['teams'])
