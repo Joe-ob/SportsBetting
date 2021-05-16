@@ -1,4 +1,4 @@
-from App.odds_seeker import Match_Team
+from app.odds_seeker import Match_Team
 
 Mock_list_1 = ["a", "b", "c"]
 Mock_list_2 = ["f", "e", "d", "c", "b", "a"]
