@@ -7,7 +7,6 @@ import requests
 from dotenv import load_dotenv
 from datetime import datetime, timedelta, date
 import time
-import pytz
 
 load_dotenv()
 
@@ -16,7 +15,7 @@ b = []
 teams = []
 teams_playing = []
 
-def Match_Team(item, teams_playing):
+def match_team(item, teams_playing):
     """
     Format: strings in lists
 
@@ -217,7 +216,7 @@ if OnlineList[user_index] == "Yes":
                         for site in item["sites"]:
                             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
                     #check = all(item in teams_playing for item in teams)
-                    Match_Team(item, teams_playing)
+                    match_team(item, teams_playing)
                     #if check is True:
                     #    a.append(item['teams'])
                     #    b.append(item['teams'])
