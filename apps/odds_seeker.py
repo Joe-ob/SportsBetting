@@ -107,7 +107,7 @@ val = False
 
 
 while val == False:
-    user_state = input("Please enter your state i.e. New York, NY").upper()
+    user_state = input("Please enter your state i.e. New York, NY: ").upper()
 
     if user_state in StateList:
         user_index = (StateList.index(user_state))
