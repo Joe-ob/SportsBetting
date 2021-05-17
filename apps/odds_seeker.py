@@ -1,5 +1,4 @@
-#import pandas as pd
-#from _typeshed import NoneType
+#Sports Betting Application
 import os
 import csv
 import time
@@ -8,11 +7,12 @@ import requests
 from dotenv import load_dotenv
 from datetime import datetime, timedelta, date
 import time
-#from re import search
 
+#Pulls API from env file
 load_dotenv()
 apikey = os.environ.get("API_KEY")
 
+#Defines Variables before Function
 a = []
 b = []
 teams = []
@@ -20,7 +20,7 @@ teams_playing = []
 Test_bool = True
 check = True
 
-
+#Checks if The team the user inputs matches the teams that are playing today
 def match_team(teams_playing, teams):
     """
     Format: strings in lists
@@ -37,7 +37,6 @@ def match_team(teams_playing, teams):
         b.append(item['teams'])
         print("")
         print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-        #time.sleep(delay)
         for site in item["sites"]:
             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
         teams_playing.clear()
@@ -47,14 +46,7 @@ def match_team(teams_playing, teams):
         teams_playing.clear()
         Test_bool =False
     return Test_bool
-#def find_team(home, away, Team_name, check):
-    #if search(Team_name, home):
-    #    check is True
-    #else:
-    #    if search(Team_name, away):
-    #        check is True
-    #    else:
-    #        check is False
+
 
 
 if __name__ == "__main__":
@@ -62,13 +54,13 @@ if __name__ == "__main__":
 
 
 
-    #data_1 = pd.read_csv('SportsBetting.csv')
-    #print(data_1)
+
 
     delay = 1.5
 
     # An api key is emailed to you when you sign up to a plan
 
+#Reads csv files into lists
 
     AbbrevList = []
     with open("SportsInfo.csv", "r") as csv_file:
@@ -76,7 +68,6 @@ if __name__ == "__main__":
         for lines in read_csv:
             AbbrevList.append(lines[1])
     AbbrevList.pop(0)        
-    #print(AbbrevList)
 
     StateList = []
     with open("SportsInfo.csv", "r") as csv_file:
@@ -84,7 +75,6 @@ if __name__ == "__main__":
         for lines in read_csv:
             StateList.append(lines[0])
     StateList.pop(0)        
-    #print(StateList)
 
     LegalList = []
     with open("SportsInfo.csv", "r") as csv_file:
@@ -92,7 +82,6 @@ if __name__ == "__main__":
         for lines in read_csv:
             LegalList.append(lines[2])
     LegalList.pop(0)        
-    #print(LegalList)
 
     OnlineList = []
     with open("SportsInfo.csv", "r") as csv_file:
@@ -100,7 +89,6 @@ if __name__ == "__main__":
         for lines in read_csv:
             OnlineList.append(lines[3])
     OnlineList.pop(0)        
-    #print(OnlineList)
 
 
     RegisterList = []
@@ -109,7 +97,6 @@ if __name__ == "__main__":
         for lines in read_csv:
             RegisterList.append(lines[4])
     RegisterList.pop(0)        
-    #print(RegisterList)
 
     FutureList = []
     with open("SportsInfo.csv", "r") as csv_file:
@@ -117,11 +104,9 @@ if __name__ == "__main__":
         for lines in read_csv:
             FutureList.append(lines[5])
     FutureList.pop(0)        
-    #print(FutureList)
 
-
+#Accepts user State info and loops it invalid
     val = False
-
 
     while val == False:
         user_state = input("Please enter your state i.e. New York, NY: ").upper()
@@ -138,7 +123,6 @@ if __name__ == "__main__":
             time.sleep(delay)
             print("Please input a valid state")
             time.sleep(delay)
-
 
     if OnlineList[user_index] == "Yes":
         time.sleep(delay)
@@ -157,7 +141,7 @@ if __name__ == "__main__":
             print("Please enter a valid sport")
             #exit()`
 
-        ## Can probably do this cleaner but its not raising an error if I don't make a new variable
+#converts user to api keywords
         sport_selection = sport
         if sport_selection == 'baseball':
             sport_selection = 'baseball_mlb'
@@ -168,7 +152,7 @@ if __name__ == "__main__":
         elif sport_selection == 'basketball':
             sport_selection = 'basketball_nba'
 
-
+#Pulls data from API
         odds_response = requests.get('https://api.the-odds-api.com/v3/odds', params={
             'api_key': apikey,                                                         
             'sport': sport_selection,                                                        
@@ -180,9 +164,9 @@ if __name__ == "__main__":
         if not odds_json['success']:
             print(
                 'There was a problem with the odds request, please try again',
-                #odds_json['msg']
             )
         else:
+            #If Data is successfully found, It shows the output and disclaimer
             print("--------------------")
             print("Disclaimer: This app is not for gambling, it only compares odds from different gambling websites to give you the best information. you must go to the websites displayed to place your bet.")
             print("--------------------")
@@ -190,10 +174,7 @@ if __name__ == "__main__":
             print("--------------------")
 
 
-            a = []
-            b = []
-            teams = []
-            teams_playing = []
+            #Turns API teams and User input teams into lists to be compared
             if odds_json['success'] == True:
                 Team_name = input("Enter the name of the team you are looking for. Should you want to search for all teams in this sport, type 'Go': ").split()
                 for word in Team_name:
@@ -203,9 +184,9 @@ if __name__ == "__main__":
                 for item in Team_name:
                     name_cap = item.capitalize()
                     teams.append(name_cap)
-                #print(teams)
+
                 for item in odds_json['data']:
-                    #print(item.keys())
+                    #Converts time and data from utc to est
                     commence_datetime = item['commence_time']
                     ts = int(commence_datetime)
                     dt_utc = datetime.utcfromtimestamp(ts)
@@ -224,16 +205,12 @@ if __name__ == "__main__":
                     if game_start_date == today:
                         home = item['teams'][0].split()
                         away = item['teams'][1].split()
-                        #print(home)
-                        #print(away)
-                        #print(Team_name)
                         teams_playing.clear()
                         for word in home:
                             teams_playing.append(word)
                         for word in away:
                             teams_playing.append(word)
                         if 'Go' in Team_name:
-                            print("Welcome")
                             check = True
                             a.append(item['teams'])
                             b.append(item['teams'])
@@ -242,27 +219,28 @@ if __name__ == "__main__":
                             for site in item["sites"]:
                                 print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
 
-
-                        #breakpoint()
+                        #Runs function to match the two lists of teams
                         match_team(teams_playing, teams)
 
-
-#def find_team(home, away, Tea
-
-
-
-
-
-
+#If no team is found, this shows all games today in that sport
                 if not a:
                     print("We could not find the team you were looking for, here are all of the upcoming games in this league.")
                     print("---------------")
                     for item in odds_json['data']:
+                        commence_datetime = item['commence_time']
+                        ts = int(commence_datetime)
+                        dt_utc = datetime.utcfromtimestamp(ts)
+                        dt_diff = timedelta(hours=4)
+                        dt_est = dt_utc - dt_diff
+                        game_start_date = dt_est.date()
+                        game_start_time = dt_est.time()
+                        today = date.today()
                         if game_start_date == today:
                             b.append(item['teams'])
                             print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
                             for site in item["sites"]:
                                 print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
+ #If sport has no games today at all, sends empty message
                 if not b:
                     print("---------------")
                     print("There are no upcoming games in this league")
@@ -270,15 +248,14 @@ if __name__ == "__main__":
                 print(f"It appears there are no", sport, "games today, make sure", sport, "is in season or try another sport.")
  
 
-            game_odds = (odds_json['data'][3])
-
             # Check your usage
             print()
             print('Remaining requests', odds_response.headers['x-requests-remaining'])
             print('Used requests', odds_response.headers['x-requests-used'])
 
 
-
+# If state has not legalized online gambling, these remove the user from the program safely
+#Reads from CSV file list
         if RegisterList[user_index] == "Yes":
             time.sleep(delay)
             print("")

@@ -1,16 +1,48 @@
 # SportsBetting
-Once the program is cloned, the user should enter 
-"cd ~/Desktop/shopping-cart"
-into their command line, if they cloned it to their desktop, to navigate to the program.
 
-Then, the user should create a local environment by entering
-"conda create -n betting-env python=3.8" 
-into their command-line.
 
-Once this environment is created, it should be activated with the command
-"conda activate betting-env"
-and updated with the proper packages by entering
-"pip install -r requirements.txt"
+## Setup
 
-Once the program is opened, the environment is set-up and properly equipped, the user can begin running the program by entering in the command-line
-"python legality.py'
+Clone or download repo from https://github.com/jpo52/sportsbetting onto your desktop
+
+Nagivate from command line:
+```sh
+cd Desktop/sportsbetting
+```
+
+Obtain a unique API key from The-Odds-API: 
+https://the-odds-api.com/#get-access
+
+Create a file called .env within the local repo:
+
+Within .env file, assign your unique API to the enviroment variable API_KEY
+
+```sh 
+API_KEY="abc123"
+```
+Substitute your unique API Key for "abc123"
+
+
+## Environment Setup
+
+Use Anaconda to create and activate a new virtual environment, called "betting-env": 
+```sh
+conda create -n betting-env python=3.8
+conda activate betting-env 
+```
+
+from inside virtual environment, install package dependencies:
+```sh
+pip install -r requirements.text
+```
+
+> NOTE: If installation causes an error message, make sure you are navigating within the repository's root directiory, where the requirements.txt file exists 
+
+
+
+## Usage
+To run the program, in the command line:
+
+```py
+python -m apps.odds_seeker
+```
