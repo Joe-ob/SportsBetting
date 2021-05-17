@@ -15,7 +15,7 @@ b = []
 teams = []
 teams_playing = []
 
-def match_team(item, teams_playing):
+def match_team(teams, teams_playing):
     """
     Format: strings in lists
 
