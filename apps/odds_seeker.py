@@ -43,14 +43,14 @@ def match_team(item, teams):
     if check is False:
         pass
         teams_playing.clear()
-def find_team(home, away, Team_name, check):
-    if search(Team_name, home):
-        check is True
-    else:
-        if search(Team_name, away):
-            check is True
-        else:
-            check is False
+#def find_team(home, away, Team_name, check):
+    #if search(Team_name, home):
+    #    check is True
+    #else:
+    #    if search(Team_name, away):
+    #        check is True
+    #    else:
+    #        check is False
 
 
 if __name__ == "__main__":
@@ -237,20 +237,6 @@ if __name__ == "__main__":
                             print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
                             for site in item["sites"]:
                                 print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-                        #print(f"{Team_name}{type(Team_name)}, {home}{type(home)}, {away}{type(away)}")
-                        #find_team(home, away, Team_name, check)
-                        #print(check)
-#                        if check is True:
-#                            a.append(item['teams'])
-#                            b.append(item['teams'])
-#                            print("")
-#                            print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-#                            time.sleep(delay)
-#                            for site in item["sites"]:
-#                                print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-#                        elif check is False:
-#                            pass
-
 
 # else:
 #                            find_team(home, away, name_cap)
@@ -263,21 +249,12 @@ if __name__ == "__main__":
 #                                for site in item["sites"]:
 #                                    print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
                         #check = all(item in teams_playing for item in teams)
+
                         #breakpoint()
                         match_team(item, teams)
-                        #if check is True:
-                        #    a.append(item['teams'])
-                        #    b.append(item['teams'])
-                        #    print("")
-                        #    print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-                        #    time.sleep(delay)
-                        #    for site in item["sites"]:
-                        #        print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-                        #    teams_playing.clear()
-                        #if check is False:
-                        #    pass
-                        #    teams_playing.clear()
-                        #
+
+#def find_team(home, away, Tea
+
 
 
 
