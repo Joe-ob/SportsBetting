@@ -18,11 +18,10 @@ b = []
 teams = []
 teams_playing = []
 Test_bool = True
+check = True
 
 
-
-
-def match_team(item, teams, Test_bool):
+def match_team(teams_playing, teams):
     """
     Format: strings in lists
 
@@ -31,8 +30,9 @@ def match_team(item, teams, Test_bool):
 
     Example: Is the list ["New", "York"] in the list ["New", "York", "Yankees"]
     """
-    check = all(item in teams_playing for item in teams)
+    check = all(items in teams_playing for items in teams)
     if check is True:
+        Test_bool = True
         a.append(item['teams'])
         b.append(item['teams'])
         print("")
@@ -41,11 +41,12 @@ def match_team(item, teams, Test_bool):
         for site in item["sites"]:
             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
         teams_playing.clear()
-        Test_bool = True
+
     if check is False:
         pass
         teams_playing.clear()
         Test_bool =False
+    return Test_bool
 #def find_team(home, away, Team_name, check):
     #if search(Team_name, home):
     #    check is True
@@ -241,20 +242,10 @@ if __name__ == "__main__":
                             for site in item["sites"]:
                                 print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
 
-# else:
-#                            find_team(home, away, name_cap)
-#                            if check == True:
-#                                a.append(item['teams'])
-#                                b.append(item['teams'])
-#                                print("")
-#                                print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-#                                time.sleep(delay)
-#                                for site in item["sites"]:
-#                                    print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-                        #check = all(item in teams_playing for item in teams)
 
                         #breakpoint()
-                        match_team(item, teams, Test_bool)
+                        match_team(teams_playing, teams)
+
 
 #def find_team(home, away, Tea
 
@@ -265,7 +256,6 @@ if __name__ == "__main__":
 
                 if not a:
                     print("We could not find the team you were looking for, here are all of the upcoming games in this league.")
-
                     print("---------------")
                     for item in odds_json['data']:
                         if game_start_date == today:
@@ -273,13 +263,12 @@ if __name__ == "__main__":
                             print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
                             for site in item["sites"]:
                                 print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
-
                 if not b:
                     print("---------------")
                     print("There are no upcoming games in this league")
             else:
                 print(f"It appears there are no", sport, "games today, make sure", sport, "is in season or try another sport.")
-
+ 
 
             game_odds = (odds_json['data'][3])
 
