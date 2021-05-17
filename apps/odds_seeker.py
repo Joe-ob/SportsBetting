@@ -181,9 +181,7 @@ if __name__ == "__main__":
                     name_cap = word.title()
                     teams.append(name_cap)
                 print("---------------")
-                for item in Team_name:
-                    name_cap = item.capitalize()
-                    teams.append(name_cap)
+
 
                 for item in odds_json['data']:
                     #Converts time and data from utc to est
@@ -249,7 +247,7 @@ if __name__ == "__main__":
             if not b:
                 print("---------------")
                 print("There are no upcoming games in this league")
-                
+
             # Check your usage
             print()
             print('Remaining requests', odds_response.headers['x-requests-remaining'])
