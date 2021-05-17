@@ -3,11 +3,11 @@
 
 ## Setup
 
-Clone or download repo from https://github.com/jpo52/sportsbetting onto your desktop
+Clone or download repo from https://github.com/jpo52/SportsBetting onto your desktop
 
 Nagivate from command line:
 ```sh
-cd Desktop/sportsbetting
+cd Desktop/SportsBetting
 ```
 
 Obtain a unique API key from The-Odds-API: 
