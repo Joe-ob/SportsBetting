@@ -8,7 +8,7 @@ Mock_list_3 = ["x", "y", "z"]
 #print(valid_result)
 for item in Mock_list_1:
     def test_match_team():
-        valid_result = match_team(Mock_list_1, Mock_list_2)
+        valid_result = match_team(item, Mock_list_2)
         assert valid_result == True
 #for item in Mock_list_3:
 #        failed_result = match_team(Mock_list_3, Mock_list_2)
