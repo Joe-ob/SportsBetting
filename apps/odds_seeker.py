@@ -221,38 +221,39 @@ if __name__ == "__main__":
 
                         #Runs function to match the two lists of teams
                         match_team(teams_playing, teams)
-
-#If no team is found, this shows all games today in that sport
-                if not a:
-                    print("We could not find the team you were looking for, here are all of the upcoming games in this league.")
-                    print("---------------")
-                    for item in odds_json['data']:
-                        commence_datetime = item['commence_time']
-                        ts = int(commence_datetime)
-                        dt_utc = datetime.utcfromtimestamp(ts)
-                        dt_diff = timedelta(hours=4)
-                        dt_est = dt_utc - dt_diff
-                        game_start_date = dt_est.date()
-                        game_start_time = dt_est.time()
-                        today = date.today()
-                        if game_start_date == today:
-                            b.append(item['teams'])
-                            print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-                            for site in item["sites"]:
-                                print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
- #If sport has no games today at all, sends empty message
-                if not b:
-                    print("---------------")
-                    print("There are no upcoming games in this league")
             else:
                 print(f"It appears there are no", sport, "games today, make sure", sport, "is in season or try another sport.")
  
 
+
+
+#If no team is found, this shows all games today in that sport
+            if not a:
+                print("We could not find the team you were looking for, here are all of the upcoming games in this league.")
+                print("---------------")
+                for item in odds_json['data']:
+                    commence_datetime = item['commence_time']
+                    ts = int(commence_datetime)
+                    dt_utc = datetime.utcfromtimestamp(ts)
+                    dt_diff = timedelta(hours=4)
+                    dt_est = dt_utc - dt_diff
+                    game_start_date = dt_est.date()
+                    game_start_time = dt_est.time()
+                    today = date.today()
+                    if game_start_date == today:
+                        b.append(item['teams'])
+                        print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
+                        for site in item["sites"]:
+                            print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
+            #If sport has no games today at all, sends empty message
+            if not b:
+                print("---------------")
+                print("There are no upcoming games in this league")
+                
             # Check your usage
             print()
             print('Remaining requests', odds_response.headers['x-requests-remaining'])
             print('Used requests', odds_response.headers['x-requests-used'])
-
 
 # If state has not legalized online gambling, these remove the user from the program safely
 #Reads from CSV file list
