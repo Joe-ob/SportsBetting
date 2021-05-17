@@ -1,8 +1,8 @@
-from apps.odds_seeker import match_team
+from apps.odds_seeker import Test_bool, match_team
 
-Mock_list_1 = ["a", "b", "c"]
-Mock_list_2 = ["a", "b", "c", "d", "e", "f"]
-Mock_list_3 = ["x", "y", "z"]
+Mock_list_1 = ["a"]
+Mock_list_2 = ["a", "b", "c"]
+Mock_list_3 = ["x"]
 
 #valid_result = match_team(Mock_list_1, Mock_list_2)
 #print(valid_result)
@@ -14,6 +14,16 @@ Mock_list_3 = ["x", "y", "z"]
 #        failed_result = match_team(Mock_list_3, Mock_list_2)
 #        assert failed_result == False
 def test_match_team():
+    #Test_bool = False
+    for item in Mock_list_1:
+        match_team(Mock_list_1, Mock_list_2, Test_bool)
+        assert Test_bool == True
+def test_match_fail():
+    #Test_bool = True
+    for item in Mock_list_3:
+        match_team(Mock_list_3, Mock_list_2, Test_bool)
+        assert Test_bool == False
+
 
 
 #

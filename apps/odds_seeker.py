@@ -17,11 +17,12 @@ a = []
 b = []
 teams = []
 teams_playing = []
+Test_bool = True
 
 
 
 
-def match_team(item, teams):
+def match_team(item, teams, Test_bool):
     """
     Format: strings in lists
 
@@ -36,13 +37,15 @@ def match_team(item, teams):
         b.append(item['teams'])
         print("")
         print(f"For the game between {item['teams']} that starts at {newStartTime} EST on {newStartDate},")
-        time.sleep(delay)
+        #time.sleep(delay)
         for site in item["sites"]:
             print(f"The odds on  {site['site_nice']} are {site['odds']['spreads']['odds']}")
         teams_playing.clear()
+        Test_bool = True
     if check is False:
         pass
         teams_playing.clear()
+        Test_bool =False
 #def find_team(home, away, Team_name, check):
     #if search(Team_name, home):
     #    check is True
@@ -251,7 +254,7 @@ if __name__ == "__main__":
                         #check = all(item in teams_playing for item in teams)
 
                         #breakpoint()
-                        match_team(item, teams)
+                        match_team(item, teams, Test_bool)
 
 #def find_team(home, away, Tea
 
